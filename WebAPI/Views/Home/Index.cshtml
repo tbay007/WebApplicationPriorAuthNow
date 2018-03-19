@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div id="bodyContainer" ng-app="JobApp">
+    <section id="content">
+        <div class="container">
+            <div class="row" ng-controller="JobCtrl" ng-init="getJobs()">
+                <div class="row col-md-12 left">
+                    <label>Search By Id:</label>
+                    <input type="text" id="searchJob" ng-model="filterValue" ng-change="getFilteredData()" />
+                </div>
+                <div class="row col-md-12 left">
+                    <input type="button" class="btn" value="Add Row" id="addJob"  ng-click="addBlankItem()" />
+                </div>
+                <div class="row col-md-12 left">
+                    <br />
+                    <table class="table table-bordered table-condensed table-striped">
+                        <thead class="">
+                            <tr>
+                                <td class="col">Id</td>
+                                <td class="col">Job Title</td>
+                                <td class="col">Grade</td>
+                                <td class="col"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in jobdata">
+                                <td>
+                                    {{item.Id}}
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="item.Title"  />
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="item.Grade" />
+                                </td>
+                                <td>
+                                    <div ng-if="item.Id == 0">
+                                        <a href="" ng-click="saveItemToRepo($index)">Save</a>
+                                    </div>
+                                    <div ng-if="item.Id != 0">
+                                        <a href="" ng-click="updateItemToRepo($index)">update</a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <span>{{Message}}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/app/job-controller.js"></script>
